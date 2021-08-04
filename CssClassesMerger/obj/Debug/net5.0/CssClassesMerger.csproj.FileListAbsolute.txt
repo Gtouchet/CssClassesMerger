@@ -1,0 +1,16 @@
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\CssClassesMerger.exe
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\CssClassesMerger.deps.json
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\CssClassesMerger.runtimeconfig.json
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\CssClassesMerger.runtimeconfig.dev.json
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\CssClassesMerger.dll
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\ref\CssClassesMerger.dll
+E:\RepoGit\CssClassesMerger\CssClassesMerger\bin\Debug\net5.0\CssClassesMerger.pdb
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.csproj.AssemblyReference.cache
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.GeneratedMSBuildEditorConfig.editorconfig
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.AssemblyInfoInputs.cache
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.AssemblyInfo.cs
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.csproj.CoreCompileInputs.cache
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.dll
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\ref\CssClassesMerger.dll
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.pdb
+E:\RepoGit\CssClassesMerger\CssClassesMerger\obj\Debug\net5.0\CssClassesMerger.genruntimeconfig.cache

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "CssClassesMerger/1.0.0": {
+        "runtime": {
+          "CssClassesMerger.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CssClassesMerger/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

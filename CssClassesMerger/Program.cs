@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CssClassesMerger;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,39 +8,56 @@ namespace CssCleaner
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Indiquez le chemin d'accès du fichier CSS à nettoyer :");
-            string filePath = Console.ReadLine();
+            string filePath = getFilePath();
 
-            string[] lines;
+            string[] lines = GetFileContent(filePath);
+            if (lines == null)
+            {
+                return;
+            }
+
+            WriteMergedFile(filePath, GetMergedClasses(lines));
+        }
+
+        static string getFilePath()
+        {
+            Console.WriteLine("Indiquez le chemin d'accès du fichier CSS à nettoyer :");
+            return Console.ReadLine();
+        }
+
+        static string[] GetFileContent(string filePath)
+        {
             try
             {
-                lines = File.ReadAllLines(filePath);
+                return File.ReadAllLines(filePath);
             }
             catch
             {
                 Console.WriteLine($"Erreur: Impossible de trouver le fichier à l'emplacement [{filePath}]");
-                return;
+                return null;
             }
+        }
 
-            SortedDictionary<string, List<string>> classes = new SortedDictionary<string, List<string>>();
-            List<string> rawLines = new List<string>();
-            List<string> duplicatesWarnings = new List<string>();
+        static Merger GetMergedClasses(string[] lines)
+        {
+            Merger merger = new Merger();
 
             for (int i = 0; i < lines.Length; i += 1)
             {
                 if (lines[i].Contains("{"))
                 {
-                    // @classes
                     if (lines[i].Contains("@"))
                     {
-                        rawLines.Add(lines[i]);
+                        merger.rawLines.Add(lines[i]);
                         int bracesCount = 1;
                         while (bracesCount != 0)
                         {
                             i += 1;
-                            rawLines.Add(lines[i]);
+                            merger.rawLines.Add(lines[i]);
                             if (lines[i].Contains("{")) bracesCount += 1;
                             else if (lines[i].Contains("}")) bracesCount -= 1;
                         }
@@ -64,14 +82,14 @@ namespace CssCleaner
                         i += 1;
                     }
 
-                    if (!classes.ContainsKey(className))
+                    if (!merger.classes.ContainsKey(className))
                     {
-                        classes.Add(className, properties);
+                        merger.classes.Add(className, properties);
                     }
 
                     else
                     {
-                        List<string> classProperties = classes[className];
+                        List<string> classProperties = merger.classes[className];
                         foreach (string classProperty in classProperties)
                         {
                             for (int j = 0; j < properties.Count; j += 1)
@@ -83,16 +101,22 @@ namespace CssCleaner
                             }
                         }
 
-                        classes[className].AddRange(properties);
+                        merger.classes[className].AddRange(properties);
                     }
                 }
             }
 
-            string newFilePath = Path.GetDirectoryName(filePath) + @"\new_" + Path.GetFileName(filePath);
-            File.WriteAllLines(newFilePath, classes.Select(className => $"{className.Key}\n{String.Join("\n", className.Value)}\n}}\n"));
-            File.AppendAllLines(newFilePath, rawLines);
+            return merger;
+        }
 
-            Console.WriteLine($"Succès: Fichier CSS nettoyé et enregistré sous [{newFilePath}].");
+        static void WriteMergedFile(string filePath,  Merger mergedClasses)
+        {
+            string newFilePath = Path.GetDirectoryName(filePath) + @"\new_" + Path.GetFileName(filePath);
+
+            File.WriteAllLines(newFilePath, mergedClasses.classes.Select(className => $"{className.Key}\n{String.Join("\n", className.Value)}\n}}\n"));
+            File.AppendAllLines(newFilePath, mergedClasses.rawLines);
+
+            Console.WriteLine($"Succès: Fichier CSS mergé et enregistré sous [{newFilePath}]");
         }
     }
 }
