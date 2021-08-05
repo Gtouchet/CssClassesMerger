@@ -1,0 +1,35 @@
+.class-1 {
+	background-color: blue;
+	color: red;
+}
+
+.class-2 {
+	border-width: 1px;
+}
+
+@something {
+	.class-1 {
+		color: red;
+	}
+	
+	.class-2 {
+		background-color: blue;
+	}
+}
+
+.a {
+	border: 5px;
+}
+
+.class-1 {
+	color: orange;
+}
+
+.class-3 {
+	boder-width: 10px;
+}
+
+.a {
+	color: none;
+	background-color: white;
+}

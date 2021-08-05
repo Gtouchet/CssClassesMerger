@@ -1,0 +1,29 @@
+.a {
+	border: 5px;
+	color: none;
+	background-color: white;
+}
+
+.class-1 {
+	background-color: blue;
+	color: red;
+	color: orange; /* DUPLICATE PROPERTY */
+}
+
+.class-2 {
+	border-width: 1px;
+}
+
+.class-3 {
+	boder-width: 10px;
+}
+
+@something {
+	.class-1 {
+		color: red;
+	}
+	
+	.class-2 {
+		background-color: blue;
+	}
+}
