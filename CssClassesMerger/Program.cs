@@ -5,7 +5,7 @@ namespace CssClassesMerger
     {
         static void Main(string[] args)
         {
-            new Merger();
+            new Merger().Merge();
         }
     }
 }

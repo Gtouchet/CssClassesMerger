@@ -7,15 +7,7 @@ namespace CssClassesMerger
 {
     class Merger
     {
-        private Dictionary<string, List<string>> classes;
-
-        public Merger()
-        {
-            this.classes = new Dictionary<string, List<string>>();
-            this.Merge();
-        }
-
-        private void Merge()
+        public void Merge()
         {
             string filePath = string.Empty;
             string[] lines = null;
@@ -26,8 +18,7 @@ namespace CssClassesMerger
                 lines = this.GetFileContent(filePath);
             }
 
-            this.MergeFileClasses(lines);
-            this.WriteMergedFile(filePath);
+            this.WriteMergedFile(filePath, this.MergeFileClasses(lines));
         }
 
         private string GetFilePath()
@@ -46,8 +37,10 @@ namespace CssClassesMerger
             }
         }
 
-        private void MergeFileClasses(string[] lines)
+        private Dictionary<string, List<string>> MergeFileClasses(string[] lines)
         {
+            Dictionary<string, List<string>> classes = new Dictionary<string, List<string>>();
+
             for (int i = 0; i < lines.Length; i += 1)
             {
                 // Commentary
@@ -62,7 +55,7 @@ namespace CssClassesMerger
                     }
                     commentary.Add(lines[i]);
 
-                    this.classes.Add($"<commentary>{Guid.NewGuid().ToString()}", commentary);
+                    classes.Add($"<commentary>{Guid.NewGuid().ToString()}", commentary);
                 }
 
                 // @ class
@@ -87,7 +80,7 @@ namespace CssClassesMerger
                         }
                     }
 
-                    this.classes.Add(className, classContent);
+                    classes.Add(className, classContent);
                 }
 
                 // Regular class
@@ -111,15 +104,14 @@ namespace CssClassesMerger
                         i += 1;
                     }
 
-                    if (!this.classes.ContainsKey(className))
+                    if (!classes.ContainsKey(className))
                     {
-                        this.classes.Add(className, properties);
+                        classes.Add(className, properties);
                     }
 
                     else
                     {
-                        List<string> classProperties = this.classes[className];
-                        foreach (string classProperty in classProperties)
+                        foreach (string classProperty in classes[className])
                         {
                             for (int j = 0; j < properties.Count; j += 1)
                             {
@@ -130,16 +122,18 @@ namespace CssClassesMerger
                             }
                         }
 
-                        this.classes[className].AddRange(properties);
+                        classes[className].AddRange(properties);
                     }
                 }
             }
+
+            return classes;
         }
 
-        private void WriteMergedFile(string filePath)
+        private void WriteMergedFile(string filePath, Dictionary<string, List<string>> classes)
         {
             string newFilePath = Path.GetDirectoryName(filePath) + @"\new_" + Path.GetFileName(filePath);
-            File.WriteAllLines(newFilePath, this.classes.Select(className =>
+            File.WriteAllLines(newFilePath, classes.Select(className =>
                 $"{(!className.Key.Contains("<commentary>") ? className.Key : null)}\n" +
                 $"{String.Join("\n", className.Value)}\n" +
                 $"{(!className.Key.Contains("<commentary>") && !className.Key.Contains("@") ? "}" : null) + "\n"}"
