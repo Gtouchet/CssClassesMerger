@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "miOsPO7YMmcwZX72YxSOnWaw5w4JIhA0Ci+LkxJRPN5aI8x7ArQ5bnAoZ+QfyX9wJSp0VOg+fYdulRYe/wfp/A==",
+  "dgSpecHash": "OEDA8cFh0RbNU+b2Tj+4NIho1L/LJOJP8yem+vMMsl4G8pROVja5o2YlG7MjiPbhMUpCTC53ux4/6pIRs/NKXw==",
   "success": true,
   "projectFilePath": "E:\\RepoGit\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Guillaume\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Guillaume\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Guillaume\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\Guillaume\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512"
+  ],
   "logs": []
 }

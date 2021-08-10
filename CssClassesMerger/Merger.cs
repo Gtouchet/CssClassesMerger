@@ -7,28 +7,26 @@ namespace CssClassesMerger
 {
     class Merger
     {
-        public string[] lines;
-        private SortedDictionary<string, List<string>> classes;
-        private List<string> rawLines;
+        private Dictionary<string, List<string>> classes;
 
         public Merger()
         {
-            this.lines = null;
-            this.classes = new SortedDictionary<string, List<string>>();
-            this.rawLines = new List<string>();
-
+            this.classes = new Dictionary<string, List<string>>();
             this.Merge();
         }
 
         private void Merge()
         {
             string filePath = string.Empty;
-            while (this.lines == null)
+            string[] lines = null;
+
+            while (lines == null)
             {
                 filePath = this.GetFilePath();
-                this.GetFileContent(filePath);
+                lines = this.GetFileContent(filePath);
             }
-            this.MergeFileClasses();
+
+            this.MergeFileClasses(lines);
             this.WriteMergedFile(filePath);
         }
 
@@ -38,53 +36,78 @@ namespace CssClassesMerger
             return Console.ReadLine();
         }
 
-        private void GetFileContent(string filePath)
+        private string[] GetFileContent(string filePath)
         {
-            try
-            {
-                this.lines = File.ReadAllLines(filePath);
-            }
-            catch
-            {
+            try {
+                return File.ReadAllLines(filePath);
+            } catch {
                 Console.WriteLine($"Erreur: Impossible de trouver le fichier à l'emplacement [{filePath}]\n");
+                return null;
             }
         }
 
-        private void MergeFileClasses()
+        private void MergeFileClasses(string[] lines)
         {
-            for (int i = 0; i < this.lines.Length; i += 1)
+            for (int i = 0; i < lines.Length; i += 1)
             {
-                if (this.lines[i].Contains("{"))
+                // Commentary
+                if (lines[i].Contains("/*"))
                 {
-                    if (this.lines[i].Contains("@"))
+                    List<string> commentary = new List<string>();
+
+                    while (!lines[i].Contains("*/"))
                     {
-                        this.rawLines.Add(this.lines[i]);
-                        int bracesCount = 1;
-                        while (bracesCount != 0)
+                        commentary.Add(lines[i]);
+                        i += 1;
+                    }
+                    commentary.Add(lines[i]);
+
+                    this.classes.Add($"<commentary>{Guid.NewGuid().ToString()}", commentary);
+                }
+
+                // @ class
+                else if (lines[i].Contains("@"))
+                {
+                    string className = lines[i];
+                    List<string> classContent = new List<string>();
+
+                    int bracesCount = 1;
+                    while (bracesCount != 0)
+                    {
+                        i += 1;
+                        classContent.Add(lines[i]);
+
+                        if (lines[i].Contains("{"))
                         {
-                            i += 1;
-                            this.rawLines.Add(this.lines[i]);
-                            if (this.lines[i].Contains("{")) bracesCount += 1;
-                            else if (this.lines[i].Contains("}")) bracesCount -= 1;
+                            bracesCount += 1;
                         }
-                        continue;
+                        else if (lines[i].Contains("}"))
+                        {
+                            bracesCount -= 1;
+                        }
                     }
 
-                    string className = this.lines[i];
+                    this.classes.Add(className, classContent);
+                }
+
+                // Regular class
+                else if (lines[i].Contains("{"))
+                {
+                    string className = lines[i];
                     i += 1;
 
                     List<string> properties = new List<string>();
-                    while (!this.lines[i].Contains("}"))
+                    while (!lines[i].Contains("}"))
                     {
                         for (int j = 0; j < properties.Count; j += 1)
                         {
-                            if (properties[j].Split(":")[0] == this.lines[i].Split(":")[0])
+                            if (properties[j].Split(":")[0].Trim() == lines[i].Split(":")[0].Trim())
                             {
                                 properties[j] += " /* DUPLICATE PROPERTY */";
                             }
                         }
 
-                        properties.Add(this.lines[i]);
+                        properties.Add(lines[i]);
                         i += 1;
                     }
 
@@ -116,9 +139,11 @@ namespace CssClassesMerger
         private void WriteMergedFile(string filePath)
         {
             string newFilePath = Path.GetDirectoryName(filePath) + @"\new_" + Path.GetFileName(filePath);
-
-            File.WriteAllLines(newFilePath, this.classes.Select(className => $"{className.Key}\n{String.Join("\n", className.Value)}\n}}\n"));
-            File.AppendAllLines(newFilePath, this.rawLines);
+            File.WriteAllLines(newFilePath, this.classes.Select(className =>
+                $"{(!className.Key.Contains("<commentary>") ? className.Key : null)}\n" +
+                $"{String.Join("\n", className.Value)}\n" +
+                $"{(!className.Key.Contains("<commentary>") && !className.Key.Contains("@") ? "}" : null) + "\n"}"
+            ));
 
             Console.WriteLine($"Succès: Fichier CSS mergé et enregistré sous [{newFilePath}]\n");
         }
