@@ -1,1 +1,3 @@
 CssClassesMerger
+
+Je m'éclate.
