@@ -1,39 +1,75 @@
-
-class_1 {
-	property_1: white;
-	property_2: black;
-}
-
-@class_A {
-	class_A1 {
-		property_A: blue !important;
-	}
-	
-	class_A2 {
-		property_A: red;
-	}
-}
-
-/* Random commentary line 17 before class_3 */
-class_3 {
-	property_1: 1px;
-}
-
-class_2 {
-	property_3: 10px !important;
-	property_3: 5px !important;
+.class_1 {
+	property_1: blue;
+	/* commentary class_1 */
+	property_2: white;
+	property_3: red;
 }
 
 /*
-	Multi lines commentary
-	Starting at 26
-	Ending at 31
-	Before second class_1 declaration
+	hello
 */
-class_1 {
-	property_2: green;
+
+.class_2 {
+	property_1: 5px;
+	property_1: red;
+	
+	
+	
+	property_2: 10px;
 }
 
-class_2 {
-	property_2: yellow !important;
+/* world */
+
+.class_1 {
+	property_2: yellow;
+}
+
+.class_2 {
+	/*
+		commentary
+  		class_2
+	*/
+	property_1: none;
+}
+
+@test_rule_1 {
+	.class_1 {
+		property_1: blue;
+		/*
+			rule class_1
+      		commentary
+		*/
+	}
+	
+	/*
+  		bonjour
+  	*/
+	
+	.class_2 {
+		property_2: 10px;
+		/* rule class_2 commentary */
+		property_2: red;
+	}
+	
+	.class_1 {
+		property_1: 50px;
+	}
+	
+	/* monde */
+}
+
+@test_rule_1 {
+	.class_1 {
+		property_2: none;
+	}
+
+	.class_3 {
+		property_1: blue;
+	}
+}
+
+@test_rule_2 {
+	.class_1 {
+		property_1: 10px orange;
+	}
 }
