@@ -22,7 +22,7 @@ namespace CssClassesMerger
         static string GetFilePath()
         {
             Console.WriteLine("Indiquez le chemin d'accès du fichier CSS dont vous voulez fusionner les classes :");
-            return Console.ReadLine();
+            return @"C:\Users\33677\Documents\css.txt"; //Console.ReadLine();
         }
 
         static string[] GetFileContent(string filePath)

@@ -1,45 +1,26 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace CssClassesMerger
 {
     class CssContent
     {
-        public List<CssClass> cssClasses { get; set; }
-        public List<CssRule> cssRules { get; set; } 
-
-        public CssContent()
-        {
-            this.cssClasses = new List<CssClass>();
-            this.cssRules = new List<CssRule>();
-        }
+        public CssClasses Classes { get; private set; } = new CssClasses();
+        public CssRules Rules { get; private set; } = new CssRules();
+        public CssCommentaries Commentaries { get; private set; } = new CssCommentaries();
 
         public void AddClass(CssClass newClass)
         {
-            CssClass existingClass = this.cssClasses.FirstOrDefault(cssClass => cssClass.name == newClass.name);
-
-            if (existingClass != null)
-            {
-                existingClass.AddProperties(newClass.properties);
-            }
-            else
-            {
-                this.cssClasses.Add(newClass);
-            }
+            this.Classes.Add(newClass);
         }
 
         public void AddRule(CssRule newRule)
         {
-            CssRule existingRule = this.cssRules.FirstOrDefault(cssRule => cssRule.name == newRule.name);
+            this.Rules.Add(newRule);
+        }
 
-            if (existingRule != null)
-            {
-                existingRule.AddClasses(newRule.cssClasses);
-            }
-            else
-            {
-                this.cssRules.Add(newRule);
-            }
+        public void AddCommentary(CssCommentaries newCommentary)
+        {
+            this.Commentaries.Add(newCommentary);
         }
     }
 }
