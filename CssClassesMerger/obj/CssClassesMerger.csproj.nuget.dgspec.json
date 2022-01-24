@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\33677\\Documents\\GitRepo\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj": {}
+    "E:\\RepoGit\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\33677\\Documents\\GitRepo\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj": {
+    "E:\\RepoGit\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\33677\\Documents\\GitRepo\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj",
+        "projectUniqueName": "E:\\RepoGit\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj",
         "projectName": "CssClassesMerger",
-        "projectPath": "C:\\Users\\33677\\Documents\\GitRepo\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj",
-        "packagesPath": "C:\\Users\\33677\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\33677\\Documents\\GitRepo\\CssClassesMerger\\CssClassesMerger\\obj\\",
+        "projectPath": "E:\\RepoGit\\CssClassesMerger\\CssClassesMerger\\CssClassesMerger.csproj",
+        "packagesPath": "C:\\Users\\Guillaume\\.nuget\\packages\\",
+        "outputPath": "E:\\RepoGit\\CssClassesMerger\\CssClassesMerger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\33677\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Guillaume\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "net5.0": {
@@ -60,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace CssClassesMerger
 {
-    /*
-     * Gérer les commentaires par une classe CssCommentary contenant une liste de string ?
-     */
     public class CssCommentaries : ICollection<string>
     {
         private ICollection<string> commentary = new List<string>();
